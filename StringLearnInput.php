@@ -1,9 +1,10 @@
 <?php 
+
+    // Welcome message
+    echo "\nWelcome to finding character or word within a paragraph!! by Richcy 15/02/2024\n\n";
+
     $continue = true;
     while($continue == true){
-        // Welcome message
-        echo "\nWelcome to finding character or word within a paragraph!! by Richcy 15/02/2024\n\n";
-
         // Entering the words and validate if input is empty or not.
         $message = "";
         while(empty(trim($message))){
