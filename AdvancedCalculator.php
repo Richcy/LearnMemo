@@ -23,26 +23,22 @@
 
     // Function to replace comma with dot in user input
     function replaceCommaWithDot($input) {
-        $useComma = false;
         $modifiedInput = [];
 
         for ($i = 0; $i < count($input); $i++) {
             $number = $input[$i];
             // Check if the number contains a comma
-            if (!empty(strpos($number, ','))) {
+            if (strpos($number, ',') !== false) {
                 // Replace comma with dot and convert to float
                 $number = (float) str_replace(',', '.', $number);
-                $useComma = true; // Set flag to true if comma is used
             } else {
-                // Convert to integer
-                $number = (int) $number;
+                // Convert to float if it contains a dot
+                if (strpos($number, '.') !== false) {
+                    $number = (float) $number;
+                }
             }
             // Add the modified number to the array
             $modifiedInput[] = $number;
-        }
-
-        if ($useComma) {
-            echo "Your input(s) does use a comma (,) so we replace it into dot (.)\n";
         }
 
         return $modifiedInput;
@@ -52,6 +48,7 @@
     function getInput($totalNumbers) {
         echo "Please enter your numbers that you want to calculate: \n";
         $input = [];
+        $useComma = false;
 
         for ($i = 0; $i < $totalNumbers; $i++) {
             echo ($i + 1) . ". "; // Prompt for input number
@@ -59,10 +56,17 @@
             while (true) {
                 $number = trim(readline()); // Read user input and remove leading/trailing whitespace
                 
+                // Call replaceCommaWithDot function to replace commas with dots
+                $number = replaceCommaWithDot([$number])[0];
+                
                 // Check if input is numeric
                 if (is_numeric($number)) {
                     // Add numeric input to the array
                     $input[] = $number;
+                    // Check if the number contains a comma
+                    if (strpos($number, ',') !== false) {
+                        $useComma = true;
+                    }
                     break; // Exit the loop if input is numeric
                 } else {
                     // Notify user and prompt again if input is not numeric
@@ -72,8 +76,9 @@
             }   
         }
         
-        // Replace comma with dot in the obtained input
-        $input = replaceCommaWithDot($input);
+        if ($useComma) {
+            echo "Your input(s) do use a comma (,) so we replaced it with a dot (.)\n";
+        }
 
         return $input;
     }
