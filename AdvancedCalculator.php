@@ -78,31 +78,24 @@
         return $input;
     }
 
-    // Function to check if user input is numeric
-    function checkNumericInput($modifiedInput) {
-        $count = count($modifiedInput);
-        for ($i = 0; $i < $count; $i++) {
-            if (!is_numeric($modifiedInput[$i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Function to perform calculations on user input numbers
     function performCalculations($modifiedInput) {
-        $numericInput = checkNumericInput($modifiedInput);
-        if (!$numericInput) {
-            echo "Your input(s) is not a number.\n";
-            echo "Please Try Again!\n";
-            return;
+        // Check if input is numeric
+        foreach ($modifiedInput as $number) {
+            if (!is_numeric($number)) {
+                echo "Your input(s) is not a number.\n";
+                echo "Please Try Again!\n";
+                return;
+            }
         }
 
+        // Initialize variables for calculations
         $addition = $modifiedInput[0];
         $subtraction = $modifiedInput[0];
         $division = $modifiedInput[0];
         $multiplication = $modifiedInput[0];
 
+        // Perform calculations
         for ($i = 0; $i < count($modifiedInput) - 1; $i++) {
             $addition = $addition + $modifiedInput[$i+1];
             $subtraction = $subtraction - $modifiedInput[$i + 1];
@@ -173,12 +166,9 @@
         // Check if totalNumbers is within the valid range
         if ($totalNumbers <= 10 && $totalNumbers >= 2) {
             $input = getInput($totalNumbers);
-            $modifiedInput = replaceCommaWithDot($input);
-            $results = performCalculations($modifiedInput);
-            if ($results) {
-                displayResults($modifiedInput, $results);
-                $continue = continueProgram($continue);
-            }
+            $results = performCalculations($input);
+            displayResults($input, $results);
+            $continue = continueProgram($continue);
         } else {
             echo "Your total number cannot exceed than 10 numbers and cannot be less than 2 numbers!!.\n";
             echo "Please Try Again!\n";
