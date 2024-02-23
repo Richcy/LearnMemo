@@ -8,17 +8,22 @@
         $isNumber = false;
 
         // Loop to ensure valid input for total number of calculations
-        while (!$isNumber) {
+        while (!$isNumber || intval($totalNumbers) != $totalNumbers) {
             // Prompt the user to enter the total numbers
             echo "Please enter how many numbers that you want to calculate (up to 10): \n";
             $totalNumbers = trim(readline());
             $isNumber = is_numeric($totalNumbers);
+            
             if (!$isNumber) {
                 echo "Invalid input! Please enter a valid integer for the total number.\n";
+            } elseif (intval($totalNumbers) != $totalNumbers) {
+                echo "Invalid input! Please enter a whole number (integer).\n";
+                $isNumber = false; // Set $isNumber to false to continue the loop
             }
         }
+        
         // Convert totalNumbers to integer
-        return (int) $totalNumbers;
+        return (int) $totalNumbers;        
     }
 
     // Function to replace comma with dot in user input
@@ -35,6 +40,8 @@
                 // Convert to float if it contains a dot
                 if (strpos($number, '.') !== false) {
                     $number = (float) $number;
+                } else {
+                    $number = (int) $number;
                 }
             }
             // Add the modified number to the array
@@ -57,12 +64,15 @@
                 $number = trim(readline()); // Read user input and remove leading/trailing whitespace
                 
                 // Call replaceCommaWithDot function to replace commas with dots
-                $number = replaceCommaWithDot([$number])[0];
+                $modifiedNumber = replaceCommaWithDot([$number]);
+                
+                // Access the first element of the returned array
+                $sanitizedNumber = $modifiedNumber[0];
                 
                 // Check if input is numeric
-                if (is_numeric($number)) {
+                if (is_numeric($sanitizedNumber)) {
                     // Add numeric input to the array
-                    $input[] = $number;
+                    $input[] = $sanitizedNumber;
                     // Check if the number contains a comma
                     if (strpos($number, ',') !== false) {
                         $useComma = true;
@@ -77,7 +87,7 @@
         }
         
         if ($useComma) {
-            echo "Your input(s) do use a comma (,) so we replaced it with a dot (.)\n";
+            echo "Your input(s) contained comma(s) (,). We have replaced them with dot(s) (.) for calculation.\n";
         }
 
         return $input;
