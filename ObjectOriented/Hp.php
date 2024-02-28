@@ -1,14 +1,16 @@
 <?php 
-
-    require_once 'Computer.php';
+    namespace ObjectOriented;
+    require_once 'Message.php';
 
     class Hp implements Computer{
+        use Message;
         public function brand(){
-            echo "HP";
+            return "HP";
         }
     }
 
     $brand = new Hp();
-    $brand->brand();
+    echo $brand->globalMessage()."\n";
+    echo $brand->brand();
 
 ?>

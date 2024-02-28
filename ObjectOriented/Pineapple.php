@@ -1,11 +1,15 @@
 <?php 
+    namespace ObjectOriented;
     // Include the Fruit class file
     require_once 'Fruit.php';
+    require_once 'Message.php';
 
     // Define the Pineapple class which extends Fruit
     Class Pineapple extends Fruit{
         // Define a method called get_message
         function get_message(){
+            echo parent::exampleStatic()."\n";
+            echo $this->globalMessage()."\n";
             // Echo an introductory message
             echo $this->intro();
             // Echo a question

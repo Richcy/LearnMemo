@@ -1,6 +1,11 @@
 <?php 
+    namespace ObjectOriented;
+
+    require_once 'Message.php';
     // Define an abstract class named Fruit
     abstract class Fruit {
+
+        use Message;
 
         // Define a constant variable
         const RICHCY = "My Name is Richcy and I'm Learning OOP\n";
@@ -9,6 +14,11 @@
         public $name; // Property to store the name of the fruit
         public $color; // Property to store the color of the fruit
         private $weight; // Private property to store the weight of the fruit
+        public static $staticValue = 5;
+
+        public static function exampleStatic(){
+            return "This is a static funtion and static value is: ".self::$staticValue;
+        }
 
         // Constructor method to initialize name and color properties
         function __construct($name, $color)
