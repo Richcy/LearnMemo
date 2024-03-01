@@ -1,20 +1,21 @@
 <?php 
-    namespace ObjectOriented;
-    // Include the Fruit class file
-    require_once 'Fruit.php';
-    require_once 'Message.php';
+    namespace ObjectOriented; // Declare the namespace for the Pineapple class
+    require_once 'Fruit.php'; // Include the Fruit class file
+    require_once 'Message.php'; // Include the Message trait file
 
     // Define the Pineapple class which extends Fruit
     Class Pineapple extends Fruit{
         // Define a method called get_message
         function get_message(){
+            // Call the exampleStatic method from the parent class Fruit
             echo parent::exampleStatic()."\n";
+            // Call the globalMessage method from the Message trait
             echo $this->globalMessage()."\n";
             // Echo an introductory message
             echo $this->intro();
             // Echo a question
             echo "Am i a berry or a fruit?\n";
-            // Call the testAbstract method and store the result in $test
+            // Call the testAbtract method and store the result in $test
             $test = $this->testAbtract(75);
             // Return the value stored in $test
             return $test;

@@ -1,11 +1,11 @@
 <?php 
-    namespace ObjectOriented;
+    namespace ObjectOriented; // Declare the namespace for the Fruit class
 
-    require_once 'Message.php';
+    require_once 'Message.php'; // Include the Message trait file
+
     // Define an abstract class named Fruit
     abstract class Fruit {
-
-        use Message;
+        use Message; // Use the Message trait in this class
 
         // Define a constant variable
         const RICHCY = "My Name is Richcy and I'm Learning OOP\n";
@@ -14,10 +14,11 @@
         public $name; // Property to store the name of the fruit
         public $color; // Property to store the color of the fruit
         private $weight; // Private property to store the weight of the fruit
-        public static $staticValue = 5;
+        public static $staticValue = 5; // Static property
 
+        // Static method to demonstrate static usage
         public static function exampleStatic(){
-            return "This is a static funtion and static value is: ".self::$staticValue;
+            return "This is a static function and static value is: ".self::$staticValue;
         }
 
         // Constructor method to initialize name and color properties
@@ -105,8 +106,4 @@
             echo "The ".$orange->get_name()."'s Color is ".$orange->get_color().".\n";
         }
     }
-
-    //$test = new Fruit("Fruit", "Color");
-    //$test->test();
-
 ?>
