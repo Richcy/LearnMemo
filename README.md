@@ -11,3 +11,5 @@ Project for Learning and Sharpen memory as a Developer
 3. W3School.com
 # Reference
 1. https://id.theasianparent.com/matematika-dasar
+2. https://www.zenius.net/blog/bilangan-prima-dan-contohnya
+3. https://akupintar.id/info-pintar/-/blogs/cara-mencari-fpb-dan-kpk-dengan-mudah-dan-cepat

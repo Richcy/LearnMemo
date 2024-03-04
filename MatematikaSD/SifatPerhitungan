@@ -21,7 +21,9 @@
 
     // Initialize variables for calculations
     $commutative = $inputs[0];
+    $commutativeTimes = $inputs[0];
     $associative = $inputs[0];
+    $associativeTimes = $inputs[0];
     $distributivePlusSum = 0;
     $distributiveMinusSum = 0;
     $pointer = 1;
@@ -29,7 +31,9 @@
     // Calculate commutative, associative, and distributive properties
     for ($i = 0; $i < count($inputs); $i++) {
         $commutative += $inputs[$i];
+        $commutativeTimes *= $inputs[$i];
         $associative = $commutative;
+        $associativeTimes = $commutativeTimes;
 
         // Check if pointer exceeds the array bounds
         if ($pointer < count($inputs)) {
@@ -78,9 +82,35 @@
     // Displaying the commutative property expression and result
     echo $commutativeExpression . $reversedExpression . " = " . $commutative . ".\n";
 
+    // 2. Commutative Property of Multiplication
+    echo "2. Sifat Komutatif Perkalian: ";
 
-    // 2. Associative Property of Addition
-    echo "2. Sifat Asosiatif Penjumlahan: ";
+    // Constructing the commutative property expression
+    $commutativeTimesExpression = "";
+    for ($i = 0; $i < count($inputs); $i++) {
+        $commutativeTimesExpression .= $inputs[$i];
+        if ($i < count($inputs) - 1) {
+            $commutativeTimesExpression .= " x ";
+        } else {
+            $commutativeTimesExpression .= " = ";
+        }
+    }
+
+    // Constructing the reversed expression
+    $reversedTimesExpression = "";
+    for ($i = count($inputs) - 1; $i >= 0; $i--) {
+        $reversedTimesExpression .= $inputs[$i];
+        if ($i > 0) {
+            $reversedTimesExpression .= " x ";
+        }
+    }
+
+    // Displaying the commutative property expression and result
+    echo $commutativeTimesExpression . $reversedTimesExpression . " = " . $commutativeTimes . ".\n";
+
+
+    // 3. Associative Property of Addition
+    echo "3. Sifat Asosiatif Penjumlahan: ";
 
     // Constructing the expression with parentheses
     $associativeExpression = "";
@@ -95,9 +125,25 @@
     // Displaying the associative property expression and result
     echo $associativeExpression . " = " . $associative . "\n";
 
+    // 4. Associative Property of Multiplication
+    echo "4. Sifat Asosiatif Perkalian: ";
 
-    // 3. Distributive Property of Multiplication over Addition
-    echo "3. Sifat Distributif Perkalian terhadap Penjumlahan: ";
+    // Constructing the expression with parentheses
+    $associativeTimesExpression = "";
+    for ($i = 0; $i < count($inputs) - 1; $i++) {
+        $associativeTimesExpression .= "(" . $inputs[$i] . " x ";
+    }
+    $associativeTimesExpression .= $inputs[count($inputs) - 1]; // Last number without addition symbol
+    for ($i = 0; $i < count($inputs) - 1; $i++) {
+        $associativeTimesExpression .= ")";
+    }
+
+    // Displaying the associative property expression and result
+    echo $associativeTimesExpression . " = " . $associativeTimes . "\n";
+
+
+    // 5. Distributive Property of Multiplication over Addition
+    echo "5. Sifat Distributif Perkalian terhadap Penjumlahan: ";
 
     // Constructing the expression with parentheses
     $distributiveExpression = $inputs[0] . " x (";
@@ -119,8 +165,8 @@
     echo $distributiveExpression . " = " . $expandedExpression . " = " . $distributivePlusSum . ".\n";
 
 
-    // 4. Distributive Property of Multiplication over Subtraction
-    echo "4. Sifat Distributif Perkalian terhadap Pengurangan: ";
+    // 6. Distributive Property of Multiplication over Subtraction
+    echo "6. Sifat Distributif Perkalian terhadap Pengurangan: ";
 
     // Constructing the expression with parentheses
     $distributiveExpression = $inputs[0] . " x (";
