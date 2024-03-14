@@ -28,13 +28,14 @@
     // Generate an array of prime numbers
     $primeNumber = generatePrime();
 
-    echo "Masukkan bilangan bulat pertama: ";
-    $input1 = trim(readline());
-    echo "Masukkan bilangan bulat kedua: ";
-    $input2 = trim(readline());
+    // Accept input numbers from the user
+    for ($i = 0; $i < 2; $i++) {
+        echo "Masukkan bilangan bulat ke ".($i+1).": ";
+        $input[$i] = trim(readline());
+    }
 
-    $number1 = $input1;
-    $number2 = $input2;
+    $number1 = $input[0];
+    $number2 = $input[1];
 
     // Initialize pointers for both numbers
     $pointer1 = 0;
@@ -70,16 +71,10 @@
     }
 
     // Output prime factors of both numbers
-    echo "Faktorisasi prima dari bilangan ".$input1.": " . implode(" x ", $usedFactor1);
-    if ($number1 == 1) {
-        echo " x 1"; // Add factor of 1 to the output
-    }
+    echo "Faktorisasi prima dari bilangan ".$input[0].": " . implode(" x ", $usedFactor1);
     echo "\n";
 
-    echo "Faktorisasi prima dari bilangan ".$input2.": " . implode(" x ", $usedFactor2);
-    if ($number2 == 1) {
-        echo " x 1"; // Add factor of 1 to the output
-    }
+    echo "Faktorisasi prima dari bilangan ".$input[1].": " . implode(" x ", $usedFactor2);
     echo "\n";
 
   // Initialize arrays to store counts of prime factors
@@ -136,6 +131,9 @@
     $commonFactorKeys = array_keys($commonFactors);
     $numCommonFactors = count($commonFactorKeys);
 
+    // Array to store factors for printing GCD
+    $printGcd = array();
+
     // Calculate GCD
     for ($i = 0; $i < $numCommonFactors; $i++) {
         $factor = $commonFactorKeys[$i];
@@ -143,7 +141,15 @@
         
         // Calculate GCD: multiply each common factor raised to the minimum power
         $gcd *= $factor ** $count;
+
+        // Add factors to print array if not already present
+        for ($j = 0; $j < $count; $j++) {
+            $printGcd[] = $factor;
+        }
     }
+
+    // Array to store factors for printing LCM
+    $printLcm = array();
 
     // Calculate LCM
     // Iterate through prime factors of number 1
@@ -156,9 +162,19 @@
             $count2 = $countFactor2[$factor];
             $maxCount = max($count1, $count2);
             $lcm *= $factor ** $maxCount;
+
+            // Add the maximum count to the print factors array
+            for ($j = 0; $j < $maxCount; $j++) {
+                $printLcm[] = $factor;
+            }
         } else {
             // Factor only appears in number 1
             $lcm *= $factor ** $count1;
+
+            // Add factors to print array if not already present
+            for ($j = 0; $j < $count1; $j++) {
+                $printLcm[] = $factor;
+            }
         }
     }
 
@@ -170,12 +186,27 @@
         if (!isset($countFactor1[$factor])) {
             // Factor only appears in number 2
             $lcm *= $factor ** $count2;
+
+            // Add factors to print array if not already present
+            for ($j = 0; $j < $count2; $j++) {
+                $printLcm[] = $factor;
+            }
         }
     }
 
+    // Print prime factorizations before calculating LCM
+    echo "\n";
+    echo "KPK dari bilangan ".$input[0]." dan ".$input[1]." adalah ".implode(", ", $printLcm);
+
+    // Print prime factorizations before calculating GCD
+    echo "\n";
+    echo "FPB dari bilangan ".$input[0]." dan ".$input[1]." adalah ".implode(", ", $printGcd);
+
+
     // Output LCM and GCD
-    echo "Kelipatan Persekutuan Terkecil (KPK) dari bilangan ".$input1." dan ".$input2." adalah $lcm\n";
-    echo "Faktor Persekutuan Terbesar (FPB) dari bilangan ".$input1." dan ".$input2." adalah $gcd\n";
+    echo "\n";
+    echo "Kelipatan Persekutuan Terkecil (KPK) dari bilangan ".$input[0]." dan ".$input[1]." adalah $lcm\n";
+    echo "Faktor Persekutuan Terbesar (FPB) dari bilangan ".$input[0]." dan ".$input[1]." adalah $gcd\n";
 
 
 ?>
